@@ -1,0 +1,20 @@
+<div class='card' ...attributes>
+  <div class='card-block'>
+    <p class='card-text'>{{@comment.body}}</p>
+  </div>
+  <div class='card-footer'>
+    <LinkTo @route='profiles.show' class='comment-author'>
+      <img src='{{@comment.author.image}}' class='comment-author-img' />
+    </LinkTo>
+    &nbsp;
+    <LinkTo
+      @route='profiles.show'
+      class='comment-author'
+    >{{@comment.author.username}}</LinkTo>
+    <span class='date-posted'>{{@comment.createdAt}}</span>
+    <span class='mod-options'>
+      <i class='ion-edit'></i>
+      <i class='ion-trash-a'></i>
+    </span>
+  </div>
+</div>

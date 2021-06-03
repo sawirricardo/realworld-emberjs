@@ -1,0 +1,54 @@
+{{page-title 'RealworldEmberjs20210602'}}
+
+{{! The following component displays Ember's default welcome message. }}
+{{! <WelcomePage /> }}
+{{! Feel free to remove this! }}
+
+<nav class='navbar navbar-light'>
+  <div class='container'>
+    <LinkTo @route='index' class='navbar-brand'>conduit</LinkTo>
+    <ul class='nav navbar-nav pull-xs-right'>
+      <li class='nav-item'>
+        <!-- Add "active" class when you're on that page" -->
+        <LinkTo @route='index' class='nav-link'>Home</LinkTo>
+      </li>
+      {{#if this.session.isAuthenticated}}
+        <li class='nav-item'>
+          <LinkTo @route='articles.new' class='nav-link'>
+            <i class='ion-compose'></i>&nbsp;New Post
+          </LinkTo>
+        </li>
+        <li class='nav-item'>
+          <LinkTo @route='users.edit' class='nav-link'>
+            <i class='ion-gear-a'></i>&nbsp;Settings
+          </LinkTo>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' {{on 'click' this.invalidateSession}}>Logout</a>
+        </li>
+      {{else}}
+        <li class='nav-item'>
+          <LinkTo @route='users.new' class='nav-link'>
+            Sign up
+          </LinkTo>
+        </li>
+        <li class='nav-item'>
+          <LinkTo @route='users.login' class='nav-link'>
+            Sign in
+          </LinkTo>
+        </li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>
+{{outlet}}
+<footer>
+  <div class='container'>
+    <a href='/' class='logo-font'>conduit</a>
+    <span class='attribution'>
+      An interactive learning project from
+      <a href='https://thinkster.io'>Thinkster</a>. Code &amp; design licensed
+      under MIT.
+    </span>
+  </div>
+</footer>

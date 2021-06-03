@@ -1,0 +1,52 @@
+<div class='article-meta' ...attributes>
+  <LinkTo @route='profiles.show' @model={{@article.author.username}}>
+    <img src='{{@article.author.image}}' />
+  </LinkTo>
+  <div class='info'>
+    <LinkTo
+      class='author'
+      @route='profiles.show'
+      @model={{@article.author.username}}
+    >{{@article.author.username}}</LinkTo>
+    <span class='date'>{{@article.createdAt}}</span>
+  </div>
+  {{#if this.session.isAuthenticated}}
+    <button class='btn btn-sm btn-outline-secondary'>
+      {{#if @article.author.following}}
+        <i class='ion-plus-minus'></i>
+        &nbsp; Unfollow
+      {{else}}
+        <i class='ion-plus-round'></i>
+        &nbsp; Follow
+      {{/if}}
+      {{@article.author.username}}
+      {{! <span class='counter'>(10)</span> }}
+    </button>
+  {{else}}
+    <LinkTo @route='users.login' class='btn btn-sm btn-outline-secondary'>
+      <i class='ion-plus-round'></i>
+      &nbsp; Follow
+      {{@article.author.username}}
+      {{! <span class='counter'>(10)</span> }}
+    </LinkTo>
+  {{/if}}
+  &nbsp;&nbsp;
+  {{#if this.session.isAuthenticated}}
+    <button class='btn btn-sm btn-outline-primary'>
+      {{#if @article.favorited}}
+        <i class='ion-heart-outline'></i>
+        &nbsp; Unfavorite Post
+      {{else}}
+        <i class='ion-heart'></i>
+        &nbsp; Favorite Post
+      {{/if}}
+      <span class='counter'>({{@article.favoritesCount}})</span>
+    </button>
+  {{else}}
+    <LinkTo @route='users.login' class='btn btn-sm btn-outline-primary'>
+      <i class='ion-heart'></i>
+      &nbsp; Favorite Post
+      <span class='counter'>({{@article.favoritesCount}})</span>
+    </LinkTo>
+  {{/if}}
+</div>

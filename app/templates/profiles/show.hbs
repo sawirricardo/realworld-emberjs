@@ -1,0 +1,68 @@
+{{page-title 'Show'}}
+<div class='profile-page'>
+
+  <div class='user-info'>
+    <div class='container'>
+      <div class='row'>
+
+        <div class='col-xs-12 col-md-10 offset-md-1'>
+          <img src='{{@model.profile.image}}' class='user-img' />
+          <h4>{{@model.profile.username}}</h4>
+          <p>
+            {{@model.profile.bio}}
+          </p>
+          {{#if this.session.isAuthenticated}}
+            <button class='btn btn-sm btn-outline-secondary action-btn'>
+              {{#if @model.profile.following}}
+                <i class='ion-minus-round'></i>
+                &nbsp; Unfollow
+              {{else}}
+                <i class='ion-plus-round'></i>
+                &nbsp; Follow
+              {{/if}}
+              {{@model.profile.username}}
+            </button>
+          {{else}}
+            <LinkTo @route='users.login'><i class='ion-plus-round'></i>
+              &nbsp; Follow
+              {{@model.profile.username}}</LinkTo>
+          {{/if}}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class='container'>
+    <div class='row'>
+
+      <div class='col-xs-12 col-md-10 offset-md-1'>
+        <div class='articles-toggle'>
+          <ul class='nav nav-pills outline-active'>
+            <li class='nav-item'>
+              <LinkTo
+                class='nav-link'
+                @route='profiles.show'
+                @model={{@model.profile.username}}
+              >My Articles</LinkTo>
+            </li>
+            <li class='nav-item'>
+              <LinkTo
+                class='nav-link'
+                @route='profiles.show.favorites'
+                @model={{@model.profile.username}}
+              >Favorited Articles</LinkTo>
+            </li>
+          </ul>
+        </div>
+
+        {{#each @model.articles as |article|}}
+          <Article::Preview @article={{article}} />
+        {{/each}}
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
